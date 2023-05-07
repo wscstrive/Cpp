@@ -6,21 +6,22 @@ public:
         vector<string> result;
         if (words.size() == 0){return result;}
         int hash[26] = {0};
-        for (int i = 0; i < words[0].size(); i++){
-            hash[words[0][i] - 'a']++;
+        for (char c : words[0]){
+            hash[c - 'a']++;
         }
 
         int otherHash[26] = {0};
-        for (int n = 1; n < words.size(); n++){
+        for (string c : words){
             memset(otherHash, 0, 26 * sizeof(int));
-            for (int i = 0; i < words[n].size(); i++){
-                otherHash[words[n][i] - 'a']++;
+            for (char s : c){
+                otherHash[s - 'a']++;
             }
 
-            for (int j = 0; j < 26;j++){
-                hash[j] = min(hash[j], otherHash[j]);
+            for (int i = 0; i < 26; i++){
+                hash[i] = min(hash[i], otherHash[i]);
             }
         }
+
         for (int i = 0; i < 26; i++){
             while (hash[i] != 0){
                 string s(1, i + 'a');
@@ -30,5 +31,4 @@ public:
         }
         return result;
     }
-    
 };
