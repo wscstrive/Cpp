@@ -3,19 +3,13 @@
 class Solution {
 public:
     vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
-        vector<int> result;
-        if (nums1.size() == 0 || nums2.size() == 0){return result;}
-        unordered_map<int, int> hash;
-        for (int c : nums1){
-            hash[c]++;
-        }
-
-        for (int s : nums2){
-            if (hash.count(s) && hash[s] > 0){
-                result.push_back(s);
-                hash[s] = 0;
+        unordered_set<int> result;
+        unordered_set<int> hash(nums1.begin(), nums1.end());
+        for (int c : nums2){
+            if (hash.find(c) != hash.end()){
+                result.insert(c);
             }
         }
-        return result;
+        return vector<int>(result.begin(), result.end());
     }
 };
