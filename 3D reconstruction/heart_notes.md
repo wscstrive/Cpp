@@ -11,7 +11,7 @@ img = Image.open(filename)
 img = np.array(img, dtype=np.float32) / 255  # scale 0~255 to 0~1
 ...
 imgs.append(img) #all images
-return imgs
+return imgs  # (b, n, _, h, w) _为RGB通道
 ```
 
 * 腌码和深度信息（1600，1200）：PIL读取信息并通过prepare_img函数将维度变为（512，640）
@@ -31,7 +31,7 @@ target_h, target_w = 512, 640
 start_h, start_w = (h - target_h)//2, (w - target_w)//2
 hr_img_crop = hr_img_ds[start_h: start_h + target_h, start_w: start_w + target_w]
 ...
-return mask_ms, value_ms_gt
+return mask_ms, depth_ms_gt  # (b, h, w)
 ```
 
 * 相机信息：包含外参矩阵（世界坐标->相机坐标）、内参矩阵（相机坐标->像素坐标）、最小深度值和深度间隔  
@@ -50,7 +50,7 @@ return mask_ms, value_ms_gt
   0 0 1
 
   425 2.5  # depth_min, depth_interval
-  return proj_matrices
+  return proj_matrices  # (b, n, 2, 4, 4)
   ```  
   
   - 深度值
@@ -61,5 +61,5 @@ return mask_ms, value_ms_gt
   disp_max = 1 / depth_min
   depth_values = np.linspace(disp_min, disp_max, self.ndepths, dtype=np.float32)
   ...
-  return depth_values
+  return depth_values  # (b, depth_intervals)
   ```
