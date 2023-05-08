@@ -12,10 +12,21 @@ np_img = np.array(img, dtype=np.float32) / 255.
 ```
 * 腌码和深度信息（1600，1200）：PIL读取信息并通过prepare_img函数将维度变为（512，640）
 ```
+# read_inforamtion
 img = Image.open(filename)
 np_img = np.array(img, dtype=np.float32)
 np_img = (np_img > 10).astype(np.float32)
 np_img = self.prepare_img(np_img)
+
+# prepare_img
+#downsample
+h, w = hr_img.shape
+hr_img_ds = cv2.resize(hr_img, (w//2, h//2), interpolation=cv2.INTER_NEAREST)
+#crop
+h, w = hr_img_ds.shape
+target_h, target_w = 512, 640
+start_h, start_w = (h - target_h)//2, (w - target_w)//2
+hr_img_crop = hr_img_ds[start_h: start_h + target_h, start_w: start_w + target_w]
 ```
 * 相机信息：包含外参矩阵（世界坐标->相机坐标）、内参矩阵（相机坐标->像素坐标）、最小深度值和深度间隔  
   - 外参矩阵（4，4）  
