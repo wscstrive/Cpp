@@ -1,10 +1,10 @@
 # CODE ING!!!
 ## 数组
-[706.二分查找](leetcode/704.二分查找.cpp)  
-[27.移除元素](leetcode/27.移除元素.cpp)  
-[977.有序数组的平方](leetcode/977.有序数组的平方.cpp)  
-[209.长度最小的子数组](leetcode/209.长度最小的子数组.cpp)  
-[59.螺旋矩阵II](leetcode/59.螺旋矩阵II.cpp)  
+1.[706.二分查找](leetcode/704.二分查找.cpp)  
+2.[27.移除元素](leetcode/27.移除元素.cpp)  
+3.[977.有序数组的平方](leetcode/977.有序数组的平方.cpp)  
+4.[209.长度最小的子数组](leetcode/209.长度最小的子数组.cpp)  
+5.[59.螺旋矩阵II](leetcode/59.螺旋矩阵II.cpp)  
 ## 链表
 [203.移除链表元素](leetcode/203.移除链表元素.cpp)  
 [707.设计链表](leetcode/707.设计链表.cpp)  
