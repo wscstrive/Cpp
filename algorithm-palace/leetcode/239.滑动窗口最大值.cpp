@@ -14,15 +14,38 @@
 
 class Solution {
 public:
+    class Myque{
+    public:
+        deque<int> que;
+        void pop(int value){
+            if (!que.empty() && value == que.front()){
+                que.pop_front();
+            }
+        }
+
+        void push(int value){
+            while (!que.empty() && value > que.back()){
+                que.pop_back();
+            }
+            que.push_back(value);
+        }
+
+        int front(){
+            return que.front();
+        }
+    };
+
     vector<int> maxSlidingWindow(vector<int>& nums, int k) {
-        deque<int> dq;
         vector<int> result;
-        int len = nums.size();
-        for (int i = 0; i < len; i++){
-            if (!dq.empty() && dq.front() < i - k + 1) dq.pop_front();
-            while (!dq.empty() && nums[dq.back()] <= nums[i]) dq.pop_back();
-            dq.push_back(i);
-            if (i >= k - 1) result.push_back(nums[dq.front()]);
+        Myque que;
+        for (int i = 0; i < k; i++){
+            que.push(nums[i]);
+        }
+        result.push_back(que.front());
+        for (int i = k; i < nums.size(); i++){
+            que.pop(nums[i - k]);
+            que.push(nums[i]);
+            result.push_back(que.front());
         }
         return result;
     }
