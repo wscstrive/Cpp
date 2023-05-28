@@ -36,3 +36,27 @@ public:
         return answer;
     }
 };
+
+// python3
+class Solution:
+    def generateMatrix(self, n: int) -> List[List[int]]:
+        l, t, r, b, k = 0, 0, n - 1, n - 1, 1
+        result = [[0] * n for _ in range(n)]
+        while k <= n ** 2:
+            for i in range(l, r + 1):
+                result[t][i] = k
+                k += 1
+            t += 1
+            for i in range(t, b + 1):
+                result[i][r] = k
+                k += 1
+            r -= 1
+            for i in range(r, l - 1, -1):
+                result[b][i] = k
+                k += 1
+            b -= 1
+            for i in range(b, t - 1, -1):
+                result[i][l] = k
+                k += 1
+            l += 1
+        return result
