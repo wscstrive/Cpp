@@ -2,17 +2,26 @@
 // 不要使用额外的数组空间，你必须仅使用 O(1) 额外空间并 原地 修改输入数组。
 // 元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。
 
+// c++
 class Solution {
 public:
     int removeElement(vector<int>& nums, int val) {
-        for (auto it = nums.begin(); it != nums.end();){
-            if (*it == val){
-                nums.erase(it);
-            }
-            else{
-                ++it;
+        int slow = 0;
+        for (int fast = 0; fast < nums.size(); fast++) {
+            if (nums[fast] != val) {
+                nums[slow++] = nums[fast];
             }
         }
-        return nums.size();
+        return slow; 
     }
 };
+
+// python3
+class Solution:
+    def removeElement(self, nums: List[int], val: int) -> int:
+        slow = 0
+        for fast in range(len(nums)):
+            if nums[fast] != val:
+                nums[slow] = nums[fast]
+                slow += 1
+        return slow
