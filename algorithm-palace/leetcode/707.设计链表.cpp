@@ -16,7 +16,7 @@ public:
     struct ListNode{
         int val;
         ListNode* next;
-        ListNode(int val):val(val),next(nullptr){};
+        ListNode(int val):val(val),next(nullptr) {};
     };
 
     MyLinkedList() {
@@ -25,7 +25,7 @@ public:
     }
     
     int get(int index) {
-        if (index < 0 || index >= _size){
+        if (index < 0 || index >= _size) {
             return -1;
         }
 
@@ -100,4 +100,60 @@ private:
  */
 
 // python
+class ListNode:
+    def __init__(self, val = 0, next = None):
+        self.val = val
+        self.next = next
 
+class MyLinkedList:
+
+    def __init__(self):
+        self.size = 0
+        self.dummyNode = ListNode()
+
+    def get(self, index: int) -> int:
+        if index < 0 or index >= self.size:
+            return -1
+        node = self.dummyNode
+        for _ in range(index):
+            node = node.next
+        return node.next.val
+
+    def addAtHead(self, val: int) -> None:
+        self.dummyNode.next = ListNode(val, self.dummyNode.next)
+        self.size += 1
+
+    def addAtTail(self, val: int) -> None:
+        node = self.dummyNode
+        while node.next != None:
+            node = node.next
+        node.next = ListNode(val, None)
+        self.size += 1
+        
+    def addAtIndex(self, index: int, val: int) -> None:
+        if index > self.size:
+            return
+        node = self.dummyNode
+        for _ in range(index):
+            node = node.next
+        node.next = ListNode(val, node.next)
+        self.size += 1
+
+    def deleteAtIndex(self, index: int) -> None:
+        if index >= self.size:
+            return
+        node = self.dummyNode
+        for _ in range(index):
+            node = node.next
+        node.next = node.next.next
+        self.size -= 1
+
+
+
+# Your MyLinkedList object will be instantiated and called as such:
+# obj = MyLinkedList()
+# param_1 = obj.get(index)
+# obj.addAtHead(val)
+# obj.addAtTail(val)
+# obj.addAtIndex(index,val)
+# obj.deleteAtIndex(index)
