@@ -9,6 +9,8 @@
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
+
+// cpp
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
@@ -23,3 +25,20 @@ public:
         return node;
     }
 };
+
+// python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        dummyNode = None
+        cur = head
+        while cur:
+            node = cur.next
+            cur.next = dummyNode
+            dummyNode = cur
+            cur = node
+        return dummyNode
