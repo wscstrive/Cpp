@@ -1,5 +1,6 @@
 // 给你两个单链表的头节点 headA 和 headB ，请你找出并返回两个单链表相交的起始节点。如果两个链表没有交点，返回 null 。
 
+// cpp
 /**
  * Definition for singly-linked list.
  * struct ListNode {
@@ -41,6 +42,39 @@ public:
             node2 = node2->next;
         }
         return NULL;
-        
     }
 };
+
+// python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> ListNode:
+        nodeA = headA
+        disA = 0
+        while nodeA:
+            disA += 1
+            nodeA = nodeA.next
+        nodeB = headB
+        disB = 0
+        while nodeB:
+            disB += 1
+            nodeB = nodeB.next
+        if disA < disB:
+            disA, disB = disB, disA
+            headA, headB = headB, headA
+        dis = disA - disB
+        nodeA = headA
+        nodeB = headB
+        for i in range(dis):
+            nodeA = nodeA.next
+        while nodeA:
+            if nodeA == nodeB:
+                return nodeA
+            nodeA = nodeA.next
+            nodeB = nodeB.next
+        return None
