@@ -8,7 +8,7 @@ result:0.352 0.278 0.315
 2. 每一阶段的深度图为下一阶段的深度平面范围（d-△d，d+△d）
 result:0.325 0.385 0.355 
 ## itermvs
-1.利用gru来代替3dcnn正则化 
+1.利用gru来代替3dcnn正则化  
 result: 
 ## transmvsnet 
 1. 将深度估计问题转位特征匹配问题 
